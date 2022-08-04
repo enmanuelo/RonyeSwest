@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net.Http;
+﻿//using System;
+//using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
 namespace RonyeSwest
@@ -14,9 +14,9 @@ namespace RonyeSwest
 
 			var kanyeResponse = client.GetStringAsync(kanyeURL).Result;
 
-			var kanyeQuote = JObject.Parse(kanyeResponse).GetValue("qoute").ToString();
+			string kanyeQuote = JObject.Parse(kanyeResponse).GetValue("qoute").ToString();
 
-			Console.WriteLine($"Ye: {kanyeQuote}\n");
+			Console.WriteLine($"Ye: '{kanyeQuote}'\n");
 
 		}
 
