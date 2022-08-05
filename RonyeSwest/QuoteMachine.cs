@@ -1,38 +1,35 @@
-﻿//using System;
-//using System.Net.Http;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace RonyeSwest
 {
-	public class QuoteMachine
-	{
-		public static void YeQuote()
-		{
-			var client = new HttpClient();
+    public class QuoteMachine
+    {
+        public static void YeQuote()
+        {
+            var client = new HttpClient();
 
-			var kanyeURL = "https://api.kanye.rest/";
+            //var kanyeURL = "https://api.kanye.rest";
 
-			var kanyeResponse = client.GetStringAsync(kanyeURL).Result;
+            var kanyeResponse = client.GetStringAsync("https://api.kanye.rest").Result;
 
-			string kanyeQuote = JObject.Parse(kanyeResponse).GetValue("qoute").ToString();
+            var kanyeQuote = JObject.Parse(kanyeResponse).GetValue("quote").ToString();
 
-			Console.WriteLine($"Ye: '{kanyeQuote}'\n");
+            Console.WriteLine($"Ye: {kanyeQuote}\n");
 
-		}
+        }
 
-		public static void RonQuote()
-		{
-			var client = new HttpClient();
+        public static void RonQuote()
+        {
+            var client = new HttpClient();
 
-			var ronURL = "https://ron-swanson-quotes.herokuapp.com/v2/quotes";
+            var ronURL = "https://ron-swanson-quotes.herokuapp.com/v2/quotes";
 
-			var ronResponse = client.GetStringAsync(ronURL).Result;
+            var ronResponse = client.GetStringAsync(ronURL).Result;
 
-			var ronQuote = JArray.Parse(ronResponse).ToString().Replace('[', ' ').Replace(']', ' ').Trim();
+            var ronQuote = JArray.Parse(ronResponse).ToString().Replace('[', ' ').Replace('\"', ' ').Replace(']', ' ').Trim();
 
-			Console.WriteLine($"Ron: {ronQuote}\n");
+            Console.WriteLine($"Ron: {ronQuote}\n");
 
-		}
-	}
+        }
+    }
 }
-
